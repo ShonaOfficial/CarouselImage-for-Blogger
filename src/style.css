@@ -31,7 +31,7 @@
 .sldP >*::before{inset-inline-start:var(--padding)}
 .sldN >*::before{inset-inline-end:var(--padding)}
 [dir=rtl] .sldB >*::before{transform:translate(0,-50%) scaleX(-1)}
-.sldD{position:absolute;left:0;bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:6px var(--padding);z-index:40}
+.sldD{box-sizing:border-box;position:absolute;left:0;bottom:10px;display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:6px var(--padding);z-index:40}
 .sldD >*{--o:.6;--w:5px;position:relative;width:calc((var(--w) - 5px) * 2.8 + 7px);height:7px;border-radius:20px;background:#fff;opacity:var(--o);box-shadow:0 1px 4px rgba(0,0,0,.35);transition:width .35s ease,opacity .35s ease;cursor:pointer}
 .sldD >*::before{content:'';position:absolute;inset:-10px -3px}
 
@@ -60,16 +60,17 @@
 .skw-s1 .sldA{inset:calc(var(--sy) * 2) 0 0 0;transform-origin:center right}
 .skw-s1 .sldB{top:calc(var(--sy) * 2);height:calc(100% - var(--sy) * 2)}
 .skw-s1 .sldA.active{transform:translate3d(0,0,0) scale(1)}
-.skw-s1 .sldA.next-1{transform:translate3d(var(--sx),calc(var(--sy) * -1),-50px) scale(.92);opacity:.85;z-index:20;filter:brightness(.95)}
-.skw-s1 .sldA.next-2{transform:translate3d(calc(var(--sx) * 2),calc(var(--sy) * -2),-100px) scale(.84);opacity:.45;z-index:10;filter:brightness(.9)}
-.skw-s1 .sldA.hidden-card{transform:translate3d(calc(var(--sx) * 3),calc(var(--sy) * -3),-150px) scale(.76)}
+.skw-s1 .sldA.next-1{transform:translate(var(--sx),calc(var(--sy) * -1 - 4%)) scale(.92);opacity:.85;z-index:20;filter:brightness(.95)}
+.skw-s1 .sldA.next-2{transform:translate(calc(var(--sx) * 2),calc(var(--sy) * -2 - 8%)) scale(.84);opacity:.45;z-index:10;filter:brightness(.9)}
+.skw-s1 .sldA.hidden-card{transform:translate(calc(var(--sx) * 2),calc(var(--sy) * -2 - 12%)) scale(.76)}
 
-/* Gaya 2: Coverflow (kartu kiri & kanan mengintip) */
-.sldW.skw-s2{aspect-ratio:5 / 1.7}
-.skw-s2 .sldA{inset:0 7.5%}
+/* Gaya 2: Coverflow (kartu kiri & kanan mengintip, semuanya tetap di dalam kotak)
+   --a = lebar kartu aktif (0-1), --ps = skala kartu yang mengintip */
+.sldW.skw-s2{--a:.85;--ps:.85;aspect-ratio:5 / 1.7;aspect-ratio:calc(2.5 / var(--a))}
+.skw-s2 .sldA{inset:0 calc((1 - var(--a)) * 50%)}
 .skw-s2 .sldA.active{transform:translateX(0) scale(1) rotateY(0)}
-.skw-s2 .sldA.left-peek{transform:translateX(-45%) scale(.85) rotateY(15deg);opacity:.65;z-index:20;filter:brightness(.85)}
-.skw-s2 .sldA.right-peek{transform:translateX(45%) scale(.85) rotateY(-15deg);opacity:.65;z-index:20;filter:brightness(.85)}
+.skw-s2 .sldA.left-peek{transform:translateX(calc((.5 / var(--a) - var(--ps) / 2) * -100%)) scale(var(--ps)) rotateY(15deg);opacity:.65;z-index:20;filter:brightness(.85)}
+.skw-s2 .sldA.right-peek{transform:translateX(calc((.5 / var(--a) - var(--ps) / 2) * 100%)) scale(var(--ps)) rotateY(-15deg);opacity:.65;z-index:20;filter:brightness(.85)}
 .skw-s2 .sldA.hidden-card{transform:scale(.7)}
 .skw-s2 .sldA.left-peek .sldT,.skw-s2 .sldA.right-peek .sldT{opacity:0}
 
@@ -78,18 +79,18 @@
 .skw-s3 .sldB{top:calc(var(--sy) * 2);height:calc(100% - var(--sy) * 2)}
 .skw-s3 .sldA{inset:calc(var(--sy) * 2) 0 0 0;transform-origin:bottom center;border:2px solid rgba(255,255,255,.4)}
 .skw-s3 .sldA.active{transform:translateY(0) scale(1);border-color:rgba(255,255,255,.8);box-shadow:0 0 35px color-mix(in srgb,var(--linkB,#ec4899) 60%,transparent)}
-.skw-s3 .sldA.next-1{transform:translateY(calc(var(--sy) * -1)) scale(.92);opacity:.8;z-index:20;filter:brightness(.9)}
-.skw-s3 .sldA.next-2{transform:translateY(calc(var(--sy) * -2)) scale(.84);opacity:.4;z-index:10;filter:brightness(.8)}
-.skw-s3 .sldA.hidden-card{transform:translateY(calc(var(--sy) * -3)) scale(.76)}
+.skw-s3 .sldA.next-1{transform:translateY(calc(var(--sy) * -1 - 8%)) scale(.92);opacity:.8;z-index:20;filter:brightness(.9)}
+.skw-s3 .sldA.next-2{transform:translateY(calc(var(--sy) * -2 - 16%)) scale(.84);opacity:.4;z-index:10;filter:brightness(.8)}
+.skw-s3 .sldA.hidden-card{transform:translateY(calc(var(--sy) * -2 - 24%)) scale(.76)}
 
 /* Gaya 4: Minimalist Stack (menumpuk ke bawah) */
 .hroW .sldW.skw-s4,.sldW.skw-s4{box-sizing:content-box;padding-bottom:calc(var(--sy) * 2)}
 .skw-s4 .sldB{height:calc(100% - var(--sy) * 2)}
 .skw-s4 .sldA{inset:0 0 calc(var(--sy) * 2) 0;transform-origin:top center}
 .skw-s4 .sldA.active{transform:translateY(0) scale(1)}
-.skw-s4 .sldA.next-1{transform:translateY(var(--sy)) scale(.94);opacity:.85;z-index:20;filter:brightness(.92)}
-.skw-s4 .sldA.next-2{transform:translateY(calc(var(--sy) * 2)) scale(.88);opacity:.5;z-index:10;filter:brightness(.85)}
-.skw-s4 .sldA.hidden-card{transform:translateY(calc(var(--sy) * 3)) scale(.82)}
+.skw-s4 .sldA.next-1{transform:translateY(calc(var(--sy) + 6%)) scale(.94);opacity:.85;z-index:20;filter:brightness(.92)}
+.skw-s4 .sldA.next-2{transform:translateY(calc(var(--sy) * 2 + 12%)) scale(.88);opacity:.5;z-index:10;filter:brightness(.85)}
+.skw-s4 .sldA.hidden-card{transform:translateY(calc(var(--sy) * 2 + 18%)) scale(.82)}
 .skw-s4 .sldD{bottom:calc(var(--sy) * 2 + 8px)}
 
 /* ---------- Responsif ---------- */
@@ -100,6 +101,7 @@
   .sldT{max-width:92%;gap:5px;padding-inline-start:calc(var(--padding) + 4px)}
   .sldT::before{font-size:clamp(14px,4.2vw,18px);-webkit-line-clamp:2}
   .sldT::after,.sldCta{display:none}
+  .sldW.skw-s2{--a:.92;--ps:.88}
   .sldB{display:none}
   .sldD{bottom:6px}
   .skw-s4 .sldD{bottom:calc(var(--sy) * 2 + 4px)}
