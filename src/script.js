@@ -1,26 +1,3 @@
-// =========================================================
-// PENGATURAN UTAMA: PILIH GAYA CAROUSEL YANG AKTIF
-// 1 = 3D Stacked Depth
-// 2 = 3D Coverflow Flow
-// 3 = Floating Glow Cards
-// 4 = Minimalist Split Stack
-// Ubah angka ACTIVE_STYLE untuk mengganti gaya default.
-// =========================================================
-const ACTIVE_STYLE = 3;
-
-let currentStyle = ACTIVE_STYLE;
-let currentIndex = 0;
-const totalSlides = 4;
-let isAutoPlay = false;
-let autoPlayTimer;
-
-const descriptions = {
-    1: { title: "Gaya 1: 3D Stacked Depth Peek-Behind", desc: "Kartu antrean miring bertumpuk rapi di belakang dengan efek depth yang memukau." },
-    2: { title: "Gaya 2: 3D Coverflow Flow", desc: "Intipan gambar tersusun di sisi kiri dan kanan dengan perspektif 3D melengkung." },
-    3: { title: "Gaya 3: Floating Glow Cards", desc: "Desain kartu mengambang dengan efek glow dinamis di sekeliling sudut kartu." },
-    4: { title: "Gaya 4: Minimalist Split Stack", desc: "Tata letak bertumpuk vertikal bersih dengan transisi geser modern." }
-};
-
 function setViewport(mode) {
     const wrapper = document.getElementById('viewportWrapper');
     const btnSmart = document.getElementById('btnSmart');
