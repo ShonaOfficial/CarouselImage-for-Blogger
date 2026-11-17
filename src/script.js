@@ -6,7 +6,7 @@
 // 4 = Minimalist Split Stack
 // Ubah angka ACTIVE_STYLE untuk mengganti gaya default.
 // =========================================================
-const ACTIVE_STYLE = 1;
+const ACTIVE_STYLE = 2;
 
 let currentStyle = ACTIVE_STYLE;
 let currentIndex = 0;
